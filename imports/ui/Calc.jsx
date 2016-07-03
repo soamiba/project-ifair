@@ -16,16 +16,20 @@ class Calc extends Component {
         paddingTop: 20,
         marginBottom: 50,
       },
+      selectfield:{
+        backgroundColor: 'rgba(255, 255, 0, 255)',
+        margin: 0,
+      },
     }
   }
 
   constructor(props) {
     super(props);
-    this.state = {value: 2};
+    this.state = {selvalue: 1};
   }
 
-  handleChange(e) {
-    this.setState({value});
+  handleChange(e,k,p) {
+    this.setState({selvalue: p});
   }
 
   render() {
@@ -35,7 +39,7 @@ class Calc extends Component {
         <h1 style={styles.text}>展会物流费用测算系统</h1>
         <h3 style={styles.text}>解读展会官方物流费率，预估您的参展物流成本</h3>
         <MuiThemeProvider muiTheme={getMuiTheme()}>
-          <SelectField value={this.state.value} onChange={this.handleChange.bind(this)}>
+          <SelectField style={styles.selectfield} value={this.state.selvalue} onChange={this.handleChange.bind(this)}>
             <MenuItem value={1} primaryText="Chinajoy" />
             <MenuItem value={2} primaryText="Playstation展" />
             <MenuItem value={3} primaryText="vr展" />
