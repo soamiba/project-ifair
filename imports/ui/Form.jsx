@@ -110,7 +110,7 @@ class Form extends Component {
           </div>
           <Divider />
           <div>
-            <RaisedButton delid={this.props.delid} label="测算" primary={true} onMouseUp={this.handleCalcClick.bind(this)}/>
+            <RaisedButton label="测算" primary={true} onMouseUp={this.handleCalcClick.bind(this)}/>
             <h3>小计：{this.state.xiaoji}人民币</h3>
           </div>
       </Paper>

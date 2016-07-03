@@ -19,6 +19,7 @@ class FormList extends Component {
     newForm = "货物" + newId;
     allforms = this.state.name.concat([newForm]);
     this.setState({name :allforms});
+    console.log(this.props.children);
   }
 
   handleDel(i){
@@ -28,7 +29,7 @@ class FormList extends Component {
   }
 
   render() {
-    forms = function(formname){return (<Form father={this} handleDel={this.handleDel} num={this.state.name.indexOf(formname)} name={formname} />);}.bind(this);
+    forms = function(formname){return (<Form key={formname} father={this} handleDel={this.handleDel} num={this.state.name.indexOf(formname)} name={formname} />);}.bind(this);
     return (
       <div>
         {this.state.name.map(forms)}
