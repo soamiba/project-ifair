@@ -19,6 +19,11 @@ class Form extends Component {
       xiaoji: 0,
     };
   }
+
+  componentDidUpdate() {
+    this.props.handleZong(this.props.father,this.state.xiaoji);
+  }
+
   handleChangChange(e) {
     this.setState({chang: e.target.value});
     kuan = this.state.kuan ? this.state.kuan : 0;
@@ -66,7 +71,7 @@ class Form extends Component {
             <ToolbarGroup firstChild={true}>
               <ToolbarTitle text={this.props.name} />
             </ToolbarGroup>
-            <ToolbarGroup firstChild={true}>
+            <ToolbarGroup lastChild={true}>
               <RaisedButton label="删除" primary={true} onClick={this.props.handleDel.bind(this.props.father,this.props.num)}/>
             </ToolbarGroup>
           </Toolbar>
