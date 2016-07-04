@@ -20,10 +20,6 @@ class Form extends Component {
     };
   }
 
-  componentDidUpdate() {
-    this.props.handleZong(this.props.father,this.state.xiaoji);
-  }
-
   handleChangChange(e) {
     this.setState({chang: e.target.value});
     kuan = this.state.kuan ? this.state.kuan : 0;
@@ -58,6 +54,7 @@ class Form extends Component {
     chaocbm = cbm > cbm_rule ? (cbm -cbm_rule)/cbm_rule : 0;
     rmb = (((jinguan+chuguan)*(1+chaozhong)*(1+chaocbm)+kongxiang+kaixiang*2)*cbm).toFixed(2);
     this.setState({xiaoji: rmb});
+    this.props.handleZong(this.props.father,this.props.num,rmb);
   }
   handleCheck(e,isChecked){
     this.setState({[e.target.name]: isChecked});

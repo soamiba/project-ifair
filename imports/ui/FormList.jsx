@@ -13,7 +13,16 @@ class FormList extends Component {
       num : 1,
       name :["货物1"],
       zongji : 0,
+      zongjiText : "0",
+      xiaojis :[{num:0,xiaoji:0}]
     };
+  }
+
+  componentDidUpdate() {
+    var sum = 0;
+    calcZong = function(xiaojis){sum += xiaojis.xiaoji;};
+    this.state.xiaojis.map(calcZong);
+    this.refs.zongji.text = sum;
   }
 
   handleAdd(){
@@ -22,18 +31,28 @@ class FormList extends Component {
     newForm = "货物" + newId;
     allforms = this.state.name.concat([newForm]);
     this.setState({name :allforms});
-    console.log(this.props.children);
+
+    newXiaoji = {};
+    newXiaoji.num = this.state.num;
+    newXiaoji.xiaoji = 0;
+    allXiaojis = this.state.xiaojis.concat(newXiaoji);
+    this.setState({xiaojis :allXiaojis});
   }
 
   handleDel(i){
     allforms = this.state.name;
     allforms.splice(i,1);
     this.setState({name :allforms});
+
+    allXiaojis = this.state.xiaojis;
+    allXiaojis.splice(i,1);
+    this.setState({xiaojis :allXiaojis});
   }
 
-  handleZong(o,i){
-    zongji = o.state.zongji + i;
-    console.log(zongji);
+  handleZong(o,n,i){
+    allXiaojis = o.state.xiaojis;
+    allXiaojis[n].xiaoji = i;
+    o.setState({xiaojis :allXiaojis});
   }
 
   render() {
@@ -47,7 +66,7 @@ class FormList extends Component {
         <Toolbar>
           <ToolbarGroup firstChild={true}>
             <ToolbarTitle text="总计：" />
-            <ToolbarTitle text={this.state.zongji} />
+            <ToolbarTitle refs="zongji" text="0" />
             <ToolbarTitle text="元人民币" />
           </ToolbarGroup>
         </Toolbar>

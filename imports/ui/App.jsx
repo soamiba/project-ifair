@@ -7,6 +7,18 @@ import Calc from './Calc.jsx';
 import FormList from './FormList.jsx';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      zongji: 0,
+      zongjiText: '0',
+    };
+  }
+
+  handleZong(i) {
+    this.setState({zongjiText :i});
+  }
+
   render() {
     return (
       <div>
