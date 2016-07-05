@@ -12,17 +12,17 @@ class FormList extends Component {
     this.state = {
       num : 1,
       name :["货物1"],
-      zongji : 0,
       zongjiText : "0",
       xiaojis :[{num:0,xiaoji:0}]
     };
   }
 
-  componentDidUpdate() {
+  handleZongji() {
     var sum = 0;
     calcZong = function(xiaojis){sum += xiaojis.xiaoji;};
     this.state.xiaojis.map(calcZong);
-    this.refs.zongji.text = sum;
+    sumText = sum.toFixed(2);
+    this.setState({zongjiText: sumText});
   }
 
   handleAdd(){
@@ -36,7 +36,7 @@ class FormList extends Component {
     newXiaoji.num = this.state.num;
     newXiaoji.xiaoji = 0;
     allXiaojis = this.state.xiaojis.concat(newXiaoji);
-    this.setState({xiaojis :allXiaojis});
+    this.setState({xiaojis :allXiaojis},function(){this.handleZongji();});
   }
 
   handleDel(i){
@@ -46,19 +46,19 @@ class FormList extends Component {
 
     allXiaojis = this.state.xiaojis;
     allXiaojis.splice(i,1);
-    this.setState({xiaojis :allXiaojis});
+    this.setState({xiaojis :allXiaojis},function(){this.handleZongji();});
   }
 
   handleZong(o,n,i){
     allXiaojis = o.state.xiaojis;
     allXiaojis[n].xiaoji = i;
-    o.setState({xiaojis :allXiaojis});
+    o.setState({xiaojis :allXiaojis},function(){o.handleZongji();});
   }
 
   render() {
     forms = function(formname){return (<Form key={formname} father={this} handleZong={this.handleZong} handleDel={this.handleDel} num={this.state.name.indexOf(formname)} name={formname} />);}.bind(this);
     return (
-      <div>
+      <div refs="zongji">
         {this.state.name.map(forms)}
         <FloatingActionButton secondary={true} onClick={this.handleAdd.bind(this)}>
           <ContentAdd />
@@ -66,7 +66,7 @@ class FormList extends Component {
         <Toolbar>
           <ToolbarGroup firstChild={true}>
             <ToolbarTitle text="总计：" />
-            <ToolbarTitle refs="zongji" text="0" />
+            <ToolbarTitle text={this.state.zongjiText} />
             <ToolbarTitle text="元人民币" />
           </ToolbarGroup>
         </Toolbar>

@@ -52,9 +52,10 @@ class Form extends Component {
     kaixiang = this.state.kaixiang ? 50 : 0;
     chaozhong = weight > weight_rule ? (weight - weight_rule)/weight_rule : 0;
     chaocbm = cbm > cbm_rule ? (cbm -cbm_rule)/cbm_rule : 0;
-    rmb = (((jinguan+chuguan)*(1+chaozhong)*(1+chaocbm)+kongxiang+kaixiang*2)*cbm).toFixed(2);
+    rmbnum = (((jinguan+chuguan)*(1+chaozhong)*(1+chaocbm)+kongxiang+kaixiang*2)*cbm)
+    rmb = rmbnum.toFixed(2);
     this.setState({xiaoji: rmb});
-    this.props.handleZong(this.props.father,this.props.num,rmb);
+    this.props.handleZong(this.props.father,this.props.num,rmbnum);
   }
   handleCheck(e,isChecked){
     this.setState({[e.target.name]: isChecked});
