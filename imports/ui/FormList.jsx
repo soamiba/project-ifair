@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
-import {Toolbar, ToolbarGroup, ToolbarTitle} from 'material-ui/Toolbar';
+import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
+import RaisedButton from 'material-ui/RaisedButton';
 
 
 import Form from './Form.jsx';
@@ -60,14 +61,19 @@ class FormList extends Component {
     return (
       <div refs="zongji">
         {this.state.name.map(forms)}
-        <FloatingActionButton secondary={true} onClick={this.handleAdd.bind(this)}>
-          <ContentAdd />
-        </FloatingActionButton>
         <Toolbar>
           <ToolbarGroup firstChild={true}>
+            <FloatingActionButton secondary={true} onClick={this.handleAdd.bind(this)}>
+              <ContentAdd />
+            </FloatingActionButton>
+            <ToolbarSeparator style={{backgroundColor:0}}/>
             <ToolbarTitle text="总计：" />
             <ToolbarTitle text={this.state.zongjiText} />
             <ToolbarTitle text="元人民币" />
+          </ToolbarGroup>
+          <ToolbarGroup>
+            <RaisedButton label="导出为PDF" secondary={true} />
+            <RaisedButton label="保存到我的物流单" secondary={true} />
           </ToolbarGroup>
         </Toolbar>
       </div>

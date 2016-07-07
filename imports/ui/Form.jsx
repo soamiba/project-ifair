@@ -20,6 +20,7 @@ class Form extends Component {
     };
   }
 
+
   handleChangChange(e) {
     this.setState({chang: e.target.value});
     kuan = this.state.kuan ? this.state.kuan : 0;
@@ -67,7 +68,10 @@ class Form extends Component {
         <Paper zDepth={2}>
           <Toolbar>
             <ToolbarGroup firstChild={true}>
-              <ToolbarTitle text={this.props.name} />
+              <TextField style={{height : 56}} floatingLabelStyle={{top:24}} inputStyle={{marginTop:4}} underlineStyle={{borderColor:'#00e0e0'}}
+                hintText="请输入货物名称"
+                floatingLabelText={this.props.name}
+              />
             </ToolbarGroup>
             <ToolbarGroup lastChild={true}>
               <RaisedButton label="删除" primary={true} onClick={this.props.handleDel.bind(this.props.father,this.props.num)}/>
